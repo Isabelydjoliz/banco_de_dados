@@ -1,0 +1,70 @@
+Microsoft Windows [versão 10.0.22631.3737]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\heull>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2132
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use seguradora
+Database changed
+
+MariaDB [seguradora]> CREATE table cliente(
+    -> codCliente int primary key auto_increment,
+    -> nome varchar(100) not null,
+    -> telefone varchar(15) not null,
+    -> cpf varchar(15) unique not null,
+    -> rg varchar(15) unique not null,
+    -> email varchar(100) unique not null,
+    -> dataNasc datetime not null,
+    -> rua varchar(50),
+    -> num int,
+    -> compl varchar (30),
+    -> bairro varchar(30),
+    -> cidade varchar(50),
+    -> estado char(2),
+    -> cep varchar(15));
+Query OK, 0 rows affected (0.094 sec)
+
+MariaDB [seguradora]> create table carro(
+    -> codCarro int primary key auto_increment,
+    -> marca varchar(30) not null,
+    -> modelo varchar(30) not null,
+    -> chassi varchar(10),
+    -> placa varchar(10) unique not null,
+    -> cor varchar(30),
+    -> porte varchar(20),
+    -> codCliente int,
+    -> foreign key(codCliente) references cliente (codCliente));
+Query OK, 0 rows affected (0.072 sec)
+
+MariaDB [seguradora]> create table tipo(
+    -> codTipo varchar (10) primary key,
+    -> tipo varchar(30));
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [seguradora]> create table ocorrencia(
+    -> codOcorrencia int primary key auto_increment,
+    -> data date,
+    -> hora time,
+    -> codTipo varchar(10),
+    -> descricao varchar(255),
+    -> bairro varchar (30),
+    -> rua varchar (100),
+    -> cidade varchar (30),
+    -> codCarro int,
+    -> foreign key(codCarro) references carro (codCarro),
+    -> foreign key(codTipo) references tipo (codTipo));
+Query OK, 0 rows affected (0.119 sec)
+
+MariaDB [seguradora]>
+
+
+
+
