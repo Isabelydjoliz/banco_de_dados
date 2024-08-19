@@ -1,0 +1,115 @@
+CREATE TABLE proprietario (
+IDproprietario int(11) PRIMARY KEY auto_increment,
+nascimento date not null,
+rua varchar(255),
+cidade varchar(255),
+numerocasa varchar(10),
+numerocelular varchar(15) not null,
+CPF varchar(15) unique not null,
+país varchar(20),
+bairro varchar(255),
+RG varchar(15) unique not null,
+nome varchar(255) not null,
+estado varchar(255),
+cep varchar(255),
+email varchar(255) unique not null,
+contabancaria varchar(255) not null,
+pix varchar(255) not null,
+banco varchar(255) not null,
+agencia varchar(255) not null
+)
+
+
+CREATE TABLE fiador (
+IDfiador int(11) PRIMARY KEY auto_increment,
+nascimento date not null,
+nome varchar(50) not null,
+CPF varchar(15) unique not null,
+telefone varchar(15) not null,
+email varchar(255) unique not null,
+RG varchar(15) unique not null
+)
+
+
+
+CREATE TABLE corretor (
+IDcorretor int(11) PRIMARY KEY auto_increment,
+nascimento date not null,
+RG varchar(20) unique not null,
+telefone varchar(15) not null,
+email varchar(255) unique not null,
+nome varchar(255) not null,
+CPF varchar(15) unique not null,
+cidade varchar(255),
+bairro varchar(255),
+rua varchar(255),
+numerocasa varchar(20),
+complemento varcar(255)
+)
+
+
+
+CREATE TABLE inquilino (
+IDinquilino int(11) PRIMARY KEY auto_increment,
+nascimento date not null,
+CPF varchar(15) unique not null,
+email varchar(50) unique not null,
+RG varchar(15) unique not null,
+nome varchar(50) not null,
+telefone varchar(15) not null,
+IDfiador int(11),
+FOREIGN KEY(IDfiador) REFERENCES fiador (IDfiador)
+)
+
+
+
+
+CREATE TABLE imovel (
+IDimovel int(11) PRIMARY KEY auto_increment,
+bairro varchar(50) not null,
+estado varchar(50) not null,
+cidade varchar(50) not null,
+rua varchar(50) not null,
+complemento varchar(50),
+areatotal decimal(7,2) not null,
+pais varchar(50) not null,
+suite int(11) not null,
+garagem bit not null,
+numerocasa varchar(12) not null,
+alugado bit not null,
+banheiro int not null,
+quarto int(11) not null,
+vagasgaragem int (11) not null,
+quintal bit not null,
+lavanderia bit not null,
+piscina bit not null,
+areaconstruida decimal(7,2) not null,
+IDproprietario int(11),
+FOREIGN KEY(IDproprietario) REFERENCES proprietario (IDproprietario)
+)
+
+
+
+
+CREATE TABLE aluguel (
+IDaluguel int(11) PRIMARY KEY auto_increment,
+datafim date not null,
+valor decimal (4,2) not null,
+datainicio date not null,
+tipocontrato varchar(50) not null,
+datavencimento varchar(10) not null,
+descri varchar(500),
+IDinquilino int(11),
+IDimovel int(11),
+IDcorretor int(11),
+FOREIGN KEY(IDimovel) REFERENCES imovel (IDimovel),
+FOREIGN KEY(IDinquilino) REFERENCES inquilino (IDinquilino),
+FOREIGN KEY(IDcorretor) REFERENCES corretor (IDcorretor)
+)
+
+
+
+
+
+
+
