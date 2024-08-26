@@ -108,6 +108,14 @@ FOREIGN KEY(IDcorretor) REFERENCES corretor (IDcorretor)
 )
 
 
+CREATE TABLE midias (
+IDmidia int(11) PRIMARY KEY auto_increment,
+foto varchar(255),
+video varchar(255),
+IDimovel int(11),
+FOREIGN KEY(IDimovel) REFERENCES imovel (IDimovel)
+)
+
 
 
 
